@@ -16,14 +16,27 @@
      ssl: false
  });
 
- // GET /api/items - responds with an array of all items in the database.
- // TODO Handle this URL with appropriate Database interaction.
+ // retrieve scores. Currently this selects all from the table, configure it to select only the scores and the wins-losses
 
-
- // POST /api/items - adds and item to the database. The items name and price
- // are available as JSON from the request body.
- // TODO Handle this URL with appropriate Database interaction.
-
+app.get('/db/scores/', function(req, res) {
+    pool.query('SELECT * FROM public."Pingpong"').then(function(result) {
+    console.log(result.rows)
+    res.send(result.rows);
+}).catch(function(err){
+        console.log(err);
+    });
+});
+//Have the post also compare the scores, and return a W into status column each time the myScore value is higher than the opponentScore.
+app.post('/db/scores/', function(req, res) {
+    var newScore = req.body;
+    var sql = 'INSERT INTO public."Pingpong"("myScore", "opponentScore") VALUES ($1::int, $2::int)';
+    var values = [newScore.myScore, newScore.opponentScore];
+    pool.query(sql, values).then(function(result) {
+        console.log(result.rows)
+        res.status(201);
+        res.send(result.rows);
+    });
+});
 
  // DELETE /api/items/{ID} - delete an item from the database. The item is
  // selected via the {ID} part of the URL.

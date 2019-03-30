@@ -13,7 +13,7 @@
     <body ng-app="scoreKeeper">
 
         <div class="container" ng-controller="scoreController">
-            <h2>Ping Pong Score</h2>
+            <h2>Ping Pong Scorecard</h2>
 
             <form ng-submit="addscore(formItem)" class="well">
                 <div class="form-group">
@@ -24,22 +24,21 @@
                     <label for="product-price">Their score</label>
                     <input type="number" class="form-control" id="product-price" required min="0" ng-model="formItem.price">
                 </div>
-                <button type="submit" class="btn btn-primary">SubmitAdd to Cart</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Actions</th>
+                        <th>Winner</th>
+                        <th>My score</th>
+                        <th>Their score</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in items" ng-cloak>
-                        <td>{{item.product}}</td>
-                        <td>{{item.price | currency}}</td>
-                        <td><button type="button" class="btn btn-default" ng-click="deleteItem(item)">Delete</button></td>
+                    <tr ng-repeat="score in scores" ng-cloak>
+                        <td>{{score.winner}}</td>
+                        <td>{{score.myScore}}</td>                        <td><button type="button" class="btn btn-default" ng-click="deleteItem(item)">Delete record</button></td>
                     </tr>
                 </tbody>
             </table>
