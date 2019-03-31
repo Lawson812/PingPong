@@ -30,6 +30,7 @@ app.get('/db/scores/', function(req, res) {
 app.post('/db/scores/', function(req, res) {
     var newScore = req.body;
     var sql = 'INSERT INTO public."Pingpong"("myScore", "opponentScore") VALUES ($1::int, $2::int)';
+    console.log(newScore)
     var values = [newScore.myScore, newScore.opponentScore];
     pool.query(sql, values).then(function(result) {
         console.log(result.rows)

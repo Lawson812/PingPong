@@ -1,1 +1,1 @@
-var app = angular.module("shoppingCart", ["ui.bootstrap"]);
+var app = angular.module("scoreKeeper", ["ui.bootstrap"]);

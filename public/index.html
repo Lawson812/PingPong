@@ -15,14 +15,14 @@
         <div class="container" ng-controller="scoreController">
             <h2>Ping Pong Scorecard</h2>
 
-            <form ng-submit="addscore(formItem)" class="well">
+            <form ng-submit="addScore(score)" class="well">
                 <div class="form-group">
                     <label for="product-name">My score</label>
-                    <input type="text" class="form-control" id="product-name" required ng-model="formItem.product">
+                    <input type="number" class="form-control" id="product-name" required ng-model="formScore.myScore">
                 </div>
                 <div class="form-group">
                     <label for="product-price">Their score</label>
-                    <input type="number" class="form-control" id="product-price" required min="0" ng-model="formItem.price">
+                    <input type="number" class="form-control" id="product-price" required min="0" ng-model="formScore.opponentScore">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -49,7 +49,7 @@
         <script src="lib/ui-bootstrap-tpls-2.5.0.min.js" charset="utf-8"></script>
         <!-- Our Scripts -->
         <script src="js/app.js" charset="utf-8"></script>
-        <script src="js/cartController.js" charset="utf-8"></script>
-        <script src="js/cartService.js" charset="utf-8"></script>
+        <script src="js/scoreController.js" charset="utf-8"></script>
+        <script src="js/scoreService.js" charset="utf-8"></script>
     </body>
 </html>
