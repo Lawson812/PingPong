@@ -16,17 +16,16 @@
      ssl: false
  });
 
- // retrieve scores. Currently this selects all from the table, configure it to select only the scores and the wins-losses
-
-app.get('/db/scores/', function(req, res) {
+//Retrieve scores by name input
+app.get('/db/scores/:name', function(req, res) {
     var  name = req.params.name;
     console.log(name)
-    pool.query('SELECT * FROM public."Scores"').then(function(result) {
+    pool.query('SELECT * FROM public."Scores" WHERE "Name" = $1::text',[name]).then(function(result) {
         if (result.rowCount === 0) {
             res.status(404); 
             res.send("NOT FOUND");
         } else {
-            res.send(result.rows[0]);
+            res.send(result.rows);
         }
     });
     
@@ -42,10 +41,6 @@ app.post('/db/scores/', function(req, res) {
         res.send(result.rows);
     });
 });
-
- // DELETE /api/items/{ID} - delete an item from the database. The item is
- // selected via the {ID} part of the URL.
- // TODO Handle this URL with appropriate Database interaction.
 
 
  var port = process.env.PORT || 5000;

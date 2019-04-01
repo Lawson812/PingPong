@@ -16,14 +16,8 @@ app.service("scoreService", function ($http) {
     };
 
     this.getWins = function (name) {
-        return $http.get('db/scores/', name).then(function (response) {
-            console.log(response)
-//            console.log(response.data)
-//            for (i = 0; i < response.data.length; i++) {
-//                if (response.data[i].name == response.data[i].name) {
-//                  
-//                } 
-//            }
+        return $http.get('db/scores/'+ name).then(function (response) {
+            return response.data;
         })
 
     }
