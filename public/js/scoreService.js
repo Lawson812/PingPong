@@ -1,6 +1,8 @@
 var app = angular.module("scoreKeeper");
 app.service("scoreService", function ($http) {
 
+        //TODO create a service function that gets all records from the database
+
     this.getScores = function () {
 
         return $http.get('/db/scores').then(function (response) {

@@ -42,6 +42,7 @@ app.post('/db/scores/', function(req, res) {
     });
 });
 
+    //TODO create a request that gets all data from the table
 
  var port = process.env.PORT || 5000;
  app.listen(port, function () {

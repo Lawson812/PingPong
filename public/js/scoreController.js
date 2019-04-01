@@ -8,6 +8,9 @@ app.controller("scoreController", function($scope, scoreService) {
     $scope.myLosses = 0;
     $scope.myTies = 0;
     
+        //TODO get all records from database, sort by name, then push each record with the same name into its own new array in a 2 dimensional array. After that, loop through each array and get the total of wins. If the win total is higher than the next, push that name into an array of names. Ng repeat those names under the ranking
+
+    
     $scope.addScore = function() {
     scoreService.getWins($scope.formScore.name)
 
