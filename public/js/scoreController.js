@@ -1,26 +1,21 @@
 var app = angular.module("scoreKeeper");
 app.controller("scoreController", function($scope, scoreService) {
-    // Start the form off empty on page load.
     $scope.formScore = {};
 
-    // Load the cart data on page load.
-    scoreService.getScores().then(function(score) {
-        
-        $scope.core = score;
-    });
+    $scope.scores =[]
 
-    // Function on scope called when form is submitted.
     $scope.addScore = function() {
+        console.log($scope.formScore.name)
+    scoreService.getWins($scope.formScore.name)
+
         scoreService.addScore($scope.formScore).then(function() {
-            // Clear the form.
             $scope.formScore = {};
 
            scoreService.getScores().then(function(score) {
-                $scope.score = score;
+                $scope.scores = score;
+               console.log($scope.scores)
             });
         });
     };
-
-    // Function on scope called when clicking Delete for an item.
     
 });

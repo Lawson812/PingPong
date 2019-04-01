@@ -19,19 +19,23 @@
  // retrieve scores. Currently this selects all from the table, configure it to select only the scores and the wins-losses
 
 app.get('/db/scores/', function(req, res) {
-    pool.query('SELECT * FROM public."Pingpong"').then(function(result) {
-    console.log(result.rows)
-    res.send(result.rows);
-}).catch(function(err){
-        console.log(err);
+    var  name = req.params.name;
+    console.log(name)
+    pool.query('SELECT * FROM public."Scores"').then(function(result) {
+        if (result.rowCount === 0) {
+            res.status(404); 
+            res.send("NOT FOUND");
+        } else {
+            res.send(result.rows[0]);
+        }
     });
+    
 });
 //Have the post also compare the scores, and return a W into status column each time the myScore value is higher than the opponentScore.
 app.post('/db/scores/', function(req, res) {
     var newScore = req.body;
-    var sql = 'INSERT INTO public."Pingpong"("myScore", "opponentScore") VALUES ($1::int, $2::int)';
-    console.log(newScore)
-    var values = [newScore.myScore, newScore.opponentScore];
+    var sql = 'INSERT INTO public."Scores"("myScore", "opponentScore","Name") VALUES ($1::int, $2::int, $3::text)';
+    var values = [newScore.myScore, newScore.opponentScore, newScore.name];
     pool.query(sql, values).then(function(result) {
         console.log(result.rows)
         res.status(201);

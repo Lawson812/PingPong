@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Scorecard</title>
 
-        <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body ng-app="scoreKeeper">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scorecard</title>
 
-        <div class="container" ng-controller="scoreController">
-            <h2>Ping Pong Scorecard</h2>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-            <form ng-submit="addScore(score)" class="well">
-                <div class="form-group">
-                    <label for="product-name">My score</label>
-                    <input type="number" class="form-control" id="product-name" required ng-model="formScore.myScore">
-                </div>
-                <div class="form-group">
-                    <label for="product-price">Their score</label>
-                    <input type="number" class="form-control" id="product-price" required min="0" ng-model="formScore.opponentScore">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+<body ng-app="scoreKeeper">
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Winner</th>
-                        <th>My score</th>
-                        <th>Their score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="score in scores" ng-cloak>
-                        <td>{{score.winner}}</td>
-                        <td>{{score.myScore}}</td>                        <td><button type="button" class="btn btn-default" ng-click="deleteItem(item)">Delete record</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="container" ng-controller="scoreController">
+        <h2>Ping Pong Scorecard</h2>
 
-        <!-- Invlude Angular and UI.Bootstrap -->
-        <script src="lib/angular.min.js" charset="utf-8"></script>
-        <script src="lib/ui-bootstrap-tpls-2.5.0.min.js" charset="utf-8"></script>
-        <!-- Our Scripts -->
-        <script src="js/app.js" charset="utf-8"></script>
-        <script src="js/scoreController.js" charset="utf-8"></script>
-        <script src="js/scoreService.js" charset="utf-8"></script>
-    </body>
+        <form ng-submit="addScore(score)" class="well">
+            
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required ng-model="formScore.name">
+            </div>
+            <div class="form-group">
+                <label for="score">My score</label>
+                <input type="number" class="form-control" id="score" required ng-model="formScore.myScore">
+            </div>
+            <div class="form-group">
+                <label for="opponent">Opponent score</label>
+                <input type="number" class="form-control" id="opponent" required min="0" ng-model="formScore.opponentScore">
+            </div>
+             
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Ranking</th>
+                    <th>Record</th>
+                    <th>Last score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="score in scores | orderBy:wins" ng-cloak>
+                    <td>{{score.Name}}</td>
+                    <td>{{score.myScore}}</td>
+                    <td>{{score.lastScore}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="lib/angular.min.js" charset="utf-8"></script>
+    <script src="lib/ui-bootstrap-tpls-2.5.0.min.js" charset="utf-8"></script>
+    <script src="js/app.js" charset="utf-8"></script>
+    <script src="js/scoreController.js" charset="utf-8"></script>
+    <script src="js/scoreService.js" charset="utf-8"></script>
+</body>
+
 </html>
